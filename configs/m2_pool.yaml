@@ -1,0 +1,25 @@
+name : m2_pool
+
+# Traininig settings
+num_epochs : 50
+batch_size : 8
+
+# evaluate 
+eval_every : 2
+
+# checkpoint
+ckpt : null # TODO
+
+# Model 
+model:
+    type: mag_phase # mag_only
+    pooling : maxpool # maxpool
+    wavelet : haar # wavelet type
+
+# Data 
+train_bs : 8 # train batch size
+
+# Training settings
+learning_rate : 0.001
+lr_step_size : 50
+gamma : 0.1
