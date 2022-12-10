@@ -33,6 +33,7 @@ def train_one_epoch(model, train_dataloader, criterion, optimizer, args):
         noisy_spec_mag, noisy_spec_phase = get_mag_phase(noisy_spec)
                 
         # Forward
+        print(noisy_spec_mag.size())
         clean_spec_mag_pred, clean_spec_phase_pred = model(noisy_spec_mag, noisy_spec_phase)
         loss = criterion(clean_spec_mag_pred, clean_spec_phase_pred, clean_spec_mag, clean_spec_phase)
         
@@ -49,7 +50,7 @@ def train_one_epoch(model, train_dataloader, criterion, optimizer, args):
 # Main 
 # --------------------------------
 
-def main(config_file = 'ml_haar.yaml'):
+def main(config_file = 'local_exp.yaml'):
     # Settings --------------
 
     # Get configs
@@ -87,11 +88,11 @@ def main(config_file = 'ml_haar.yaml'):
 
     # Build dataloader --------------
     # train dataset
-    dataset_train = build_dataset('train', samples = 2000)
+    dataset_train = build_dataset('train', samples = 1000)
     dataloader_train = DataLoader(dataset_train, batch_size=TRAIN_BATCH_SIZE, collate_fn=custom_collate_fn)
 
     # eval dataset
-    dataset_eval = build_dataset('val', samples = 500)
+    dataset_eval = build_dataset('val', samples = 100)
     dataloader_eval = DataLoader(dataset_eval, batch_size=EVAL_BATCH_SIZE, collate_fn=custom_collate_fn)
 
 
@@ -107,7 +108,8 @@ def main(config_file = 'ml_haar.yaml'):
 
     # TODO - add support for learning rate scheduler
     optimizer = optim.SGD(model.parameters(), lr=LR)
-    # scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=LR_STEP_SIZE, gamma=GAMMA)
+#     optimizer = optim.Adam(model.parameters(), lr=LR)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=LR_STEP_SIZE, gamma=GAMMA)
 
 
     # Training --------------
@@ -145,7 +147,7 @@ def main(config_file = 'ml_haar.yaml'):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="specify config file")
-    parser.add_argument("--config", type=str, default = '../configs/m1_pool.yaml', help="specify config file")
+    parser.add_argument("--config", type=str, default = '../configs/local_exp.yaml', help="specify config file")
     args = parser.parse_args()
     main(args.config)
 

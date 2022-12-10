@@ -1,11 +1,11 @@
-name : m1_haar
+name : local_exp
 
-# Training settings
-num_epochs : 25
-batch_size : 8
+# Traininig settings
+num_epochs : 5
+batch_size : 1
 
 # evaluate 
-eval_every : 5
+eval_every : 3
 
 # checkpoint
 ckpt : null # TODO
@@ -14,7 +14,7 @@ ckpt : null # TODO
 model:
     type: mag_only # mag_phase
     pooling : wavelet # maxpool
-    wavelet : haar # wavelet type
+    wavelet : bior1.1 # wavelet type
 
 # Data 
 train_bs : 8 # train batch size
