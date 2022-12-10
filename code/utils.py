@@ -9,6 +9,10 @@ def get_mag_phase(spec):
     phase = spec.imag.type(torch.float) #spec/mag
     return mag.unsqueeze(0).unsqueeze(0), phase.unsqueeze(0).unsqueeze(0)
 
+#     mag = torch.abs(spec).type(torch.float)
+#     phase = spec/mag
+#     return mag.unsqueeze(0).unsqueeze(0), phase
+
 # Config file handler ----------------
 def load_config(config_name):
     CONFIG_PATH = '../configs'

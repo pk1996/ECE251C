@@ -23,7 +23,8 @@ class ConvRecNet_Complex(nn.Module):
         self.conv_block_5 = CausalConvBlock(128, 256, params)
         
         # LSTM
-        self.lstm_layer = nn.LSTM(input_size=256*9, hidden_size=256*9, num_layers=2, batch_first=True)
+        x = 17#9
+        self.lstm_layer = nn.LSTM(input_size=256*x, hidden_size=256*x, num_layers=2, batch_first=True)
         
         # decoder for magnitude
         self.decoder_m = nn.ModuleList()

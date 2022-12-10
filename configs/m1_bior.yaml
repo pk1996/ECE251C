@@ -1,6 +1,6 @@
-name : m1_haar
+name : m1_bior
 
-# Training settings
+# Traininig settings
 num_epochs : 25
 batch_size : 8
 
@@ -14,7 +14,7 @@ ckpt : null # TODO
 model:
     type: mag_only # mag_phase
     pooling : wavelet # maxpool
-    wavelet : haar # wavelet type
+    wavelet : bior1.1 # wavelet type
 
 # Data 
 train_bs : 8 # train batch size

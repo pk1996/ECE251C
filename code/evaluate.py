@@ -6,7 +6,7 @@ from tqdm import tqdm
 import numpy as np
 from utils import *
 
-__all__ = ['evaluate']
+__all__ = ['evaluate', 'compute_snr', 'compute_stoi', 'compute_pesq', 'compute_spectrogram']
 
 
 # --------------------------------
@@ -77,6 +77,7 @@ def evaluate(model, test_dataloader, criterion, args):
             
         # ISTFT for freq - time
         pred_spec = compute_spectrogram(clean_spec_mag_pred.squeeze().squeeze(), clean_spec_phase_pred.squeeze().squeeze())
+#         pred_spec = torch.multiply(clean_spec_mag_pred.squeeze(0).squeeze(0), noisy_spec_phase)
         clean_signal = get_signal_from_spec(clean_spec)
         pred_signal = get_signal_from_spec(pred_spec)
         
